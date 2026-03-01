@@ -1,7 +1,10 @@
 import { Box } from "lucide-react";
 import React from "react";
+import Button from "./ui/Button";
 
 const Navbar = () => {
+  const issSignedIn = false; // Replace with actual authentication logic
+  const username = "EVUM";
   const handleAuthClick = async () => {
     console.log("Login clicked");
   };
@@ -21,12 +24,30 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="actions">
-          <button className="login" onClick={handleAuthClick}>
-            Login
-          </button>
-          <a href="#upload" className="cta">
+          {issSignedIn ? (
+            <>
+                <span className="greeting">
+                    {
+                        username ? `Hello, ${username}!` : "Hello!"
+                    }
+
+                    <Button onClick={handleAuthClick} size="sm" className="btn">
+                        Log out
+                    </Button>
+                </span>
+            </>
+          ) : (
+            <>
+              <Button onClick={handleAuthClick} size="sm" variant="ghost" >
+                Login
+              </Button>
+              <a href="#upload" className="cta">
             Get started
           </a>
+            </>
+          )}
+
+          
         </div>
       </nav>
     </header>
