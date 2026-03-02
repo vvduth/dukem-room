@@ -6,7 +6,7 @@ import { useOutletContext } from "react-router";
 const Navbar = () => {
   const {
     isSignedIn,
-    username, 
+    userName: username, 
     signIn, 
     signOut
   } = useOutletContext<AuthContext>();

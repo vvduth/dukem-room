@@ -17,6 +17,11 @@ const Upload: React.FC<UploadProps> = ({ onComplete }) => {
     if (!selectedFile) return;
 
     const reader = new FileReader();
+    reader.onerror = () => {
+      console.error("Error reading file");
+      setFile(null);
+      setProgress(0);
+    }
     reader.onload = (e) => {
       if (e.target?.result) {
         const base64 = e.target.result as string;
