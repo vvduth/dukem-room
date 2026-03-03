@@ -73,6 +73,7 @@ export const dataUrlToBlob = (
 export const fetchBlobFromUrl = async (
     url: string,
 ): Promise<{ blob: Blob; contentType: string } | null> => {
+    console.log("Fetching blob from URL:", url);
     if (url.startsWith("data:")) {
         return dataUrlToBlob(url);
     }
