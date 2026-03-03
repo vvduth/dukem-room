@@ -23,6 +23,7 @@ export const getOrCreateHostingConfig =
         const record = {
             subdomain: created.subdomain,
         }
+        await puter.kv.set(HOSTING_CONFIG_KEY, record);
         return record;
     } catch (error) {
         console.warn("Failed to create hosting config", error);
