@@ -37,5 +37,32 @@ export const createProject = async ({item}: CreateProjectParams)
     const resolveSource = hostedSource?.url || (isHostedUrl(item.sourceImage) 
     ? item.sourceImage : '');
 
-    if (!resolveSource) {}
+    if (!resolveSource) {
+        console.warn("Failed to resolve source image for project", item.id);
+        return null;
+    }
+
+    const resolvedRender = hostedRender?.url ?
+    hostedRender?.url : item.renderedImage && isHostedUrl(item.renderedImage)
+    ? item.renderedImage : undefined;
+
+    const {
+        sourcePath: _sourcePath,
+        renderedPath: _renderedPath,
+        publicPath: _publicPath,
+        ...rest
+    } = item;
+
+    const payload = {
+        ...rest,
+        sourceImage: resolveSource,
+        renderedImage: resolvedRender,
+    }
+
+    try {
+        return payload;
+    } catch (error) {
+        console.log("Failed to create project", error);
+        return null;
+    }
 }
