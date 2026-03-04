@@ -1,87 +1,94 @@
-# Welcome to React Router!
+# Dukem Room (Roomify)
 
-A modern, production-ready template for building full-stack React applications using React Router.
+An AI-powered room visualizer application that transforms 2D floor plans into photorealistic top-down 3D architectural renders using Generative AI.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+![alt text](dukemroom.png)
 
-## Features
+## 🚀 Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- **2D to 3D Conversion**: Upload a floor plan and generate a 3D visualization instantly.
+- **AI-Powered**: Utilizes `gemini-2.5-flash-image-preview` via Puter.ai for high-quality generation.
+- **Interactive Comparison**: "Before and After" slider to visualize changes.
+- **Cloud Storage**: Automatically saves projects and images using **Puter.js** Hosting and KV storage.
+- **Export & Share**: Download generated renders or share project links (coming soon).
 
-## Getting Started
+## 🛠 Tech Stack
+
+- **Framework**: [React Router v7](https://reactrouter.com/) (SSR enabled)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Backend & AI**: [Puter.js](https://docs.puter.com/)
+  - **Auth**: User authentication
+  - **KV**: Project metadata storage
+  - **Hosting**: Image file storage (dynamic subdomains)
+  - **AI**: Text-to-Image generation
+  - **Workers**: Backend logic (`lib/puter.worker.js`)
+- **Build Tool**: Vite
+
+## ⚡ Getting Started
+
+### Prerequisites
+
+- Node.js (v20 or newer)
+- npm or yarn
 
 ### Installation
 
-Install the dependencies:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/vvduth/dukem-room.git
+   cd dukem-room
+   ```
 
-```bash
-npm install
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Configuration
+
+Create a `.env` file in the root directory if you are connecting to a custom backend worker (optional, defaults to production worker):
+
+```env
+VITE_PUTER_WORKER_URL="https://your-puter-worker-url.puter.work"
 ```
 
-### Development
+![alt text](image.png)
 
-Start the development server with HMR:
+### Running Locally
+
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-## Building for Production
+## 📦 Deployment
 
-Create a production build:
+### Frontend
+
+Build the application for production:
 
 ```bash
 npm run build
 ```
 
-## Deployment
+You can deploy the output to any platform that supports Node.js or request a static adapter if needed.
 
-### Docker Deployment
+### Backend (Puter Worker)
 
-To build and run using Docker:
+The backend logic resides in `lib/puter.worker.js`. To deploy:
 
-```bash
-docker build -t my-app .
+1. Create a new Worker on [Puter.com](https://puter.com).
+2. Copy the contents of `lib/puter.worker.js` into the worker.
+3. Save and Deploy.
+4. Update `VITE_PUTER_WORKER_URL` in your frontend configuration with the new worker URL.
 
-# Run the container
-docker run -p 3000:3000 my-app
-```
+## 🤝 Contributing
 
-The containerized application can be deployed to any platform that supports Docker, including:
+Contributions are welcome! Please open an issue or submit a pull request.
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+## 📄 License
 
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+This project is licensed under the MIT License.
